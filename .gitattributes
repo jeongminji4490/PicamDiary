@@ -1,2 +1,2 @@
-jest.config.js linguist-vendored
-yarn-*.js linguist-vendored
+jest.config.py linguist-vendored
+yarn-*.py linguist-vendored
