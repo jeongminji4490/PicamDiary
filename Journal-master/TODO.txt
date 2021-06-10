@@ -1,0 +1,1 @@
+Tags aren't stripped when saved. Can't decide wether they need to be stripped in journalentry.pyw or jf/entry.py. Probably both.
