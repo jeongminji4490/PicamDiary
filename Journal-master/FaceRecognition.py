@@ -19,7 +19,7 @@ from keras.models import load_model
 data_path = 'faces/' # 사진이 저장될 폴더 경로
 diary_path = 'diary/' # 일기장이 저장될 폴더 경로
 """위에 폴더가 생성된 채로 zip파일로 보냅니다. 혹시 위의 폴더를 찾을 수 없다는 오류가 생기면 해당 폴더들을 삭제하고, 다시 동일한 이름으로 생성해서 실행해주세요!"""
-
+#
 data = {}  # json_dictionary
 
 loadFileList = [f for f in listdir(diary_path) if isfile(join(diary_path, f))]
@@ -53,7 +53,7 @@ root = tkinter.Tk()  # 초기화면
 def loadPhotoFile(text): #내 PC에서 사진 불러오기
     pfilename = tkinter.filedialog.askopenfilename(initialdir="/", title="사진 불러오기",  filetypes=(("JPG files", "*.jpg"),("all files", "*.*")))
     text.config(text = pfilename)
-    text.place(x=10, y=290)  # 라벨을 이미지경로로 업데이트, 사진 줄이기
+    text.place(x=40, y=280)  # 라벨을 이미지경로로 업데이트, 사진 줄이기
     data['image'] = pfilename  # 해당 json 파일에 image key를 추가하고, value로 이미지경로 + 이미지명 저장
 
 def readToJson(index, text, text2, text3, text4, tk): #일기(제목,내용,날짜,기분),이미지 위젯에 로드
@@ -124,22 +124,16 @@ def deleteItem(index,listbox,text,tk,imageLabel): #일기장 삭제 함수
 def viewDiaryList(): #일기 보기 함수
     diaryList = tkinter.Tk()
     diaryList.geometry('660x480')
-    diaryList.iconbitmap('viewNotes.ico')
 
-    viewImage1 = PIL.Image.open('note2.PNG')
-    viewImage2 = viewImage1.resize((660, 500), PIL.Image.ANTIALIAS)  # 이미지 크기 조절
-    viewImage3 = ImageTk.PhotoImage(viewImage2, master=diaryList)  # master 설정 안해주면 오류
-    viewimageLabel = tkinter.Label(diaryList, image=viewImage3).place(x=-2, y=0)
+    diaryList.title('PicamDiary')
 
-    diaryList.title('일기 보기')
-
-    showtitle = tkinter.Label(diaryList, text="목록")
+    showtitle = tkinter.Label(diaryList, text="List")
     showtitle.place(x=30, y=60)
 
-    showdiary = tkinter.Label(diaryList, text="일기 내용")
+    showdiary = tkinter.Label(diaryList, text="content")
     showdiary.place(x=370, y=80)
 
-    showimage = tkinter.Label(diaryList, text="이미지 파일")
+    showimage = tkinter.Label(diaryList, text="image file")
     showimage.place(x=30, y=340)
 
     frame = tkinter.Frame(diaryList, width=38, height=8, relief='solid')
@@ -149,14 +143,6 @@ def viewDiaryList(): #일기 보기 함수
                                    height=8)  # 저장된 파일들을 보여줄 리스트박스 객체, 왼쪽 꽉 채우기
 
     # 스크롤바 생성
-    """
-    scrollBar = tkinter.Scrollbar(frame, orient='vertical', command=inputListBox.yview)
-    scrollBar.pack(side="right", fill="y")  
-    inputListBox.pack(side="left") 
-    inputListBox.config(yscrollcommand=scrollBar.set)
-    """
-    # 스크롤바 생성
-
     scrollBar = tkinter.Scrollbar(diaryList, orient='vertical', command=inputListBox.yview)
     scrollBar.pack(side="right", fill="y")
     #inputListBox.pack(side="left", fill="both", expand=True)
@@ -167,7 +153,7 @@ def viewDiaryList(): #일기 보기 함수
 
     # 사진 기본 이미지
     imagelabel = tkinter.Label(diaryList, wraplength=0,
-                               text="이미지", relief='sunken', fg="white", bg='black', bd=1,
+                               text="image", relief='sunken', fg="white", bg='black', bd=1,
                                width=35, height=10)
     imagelabel.place(x=30, y=270)
 
@@ -248,42 +234,34 @@ def check(Name,Role,Date,weekDay,feeling): #딕셔너리에 일기장 데이터�
     files = [('Json File', '*.json')]  # 파일 형식
     fileName = a  # 파일명 = 제목으로.
     writeToJson(fileName, data)
-    registerOk = tkinter.messagebox.showinfo("등록", "일기가 등록되었습니다.")
+    registerOk = tkinter.messagebox.showinfo("Message", "Diary is registered.")
 
 def writeDiary(): #일기 작성 함수
     wdDisplay = tkinter.Tk()
-    wdDisplay.geometry('423x365')
-    wdDisplay.iconbitmap('writing.ico')
-    wdDisplay.title('일기쓰기(모두 작성해주셔야 합니다)')
-    diary_image1 = Image.open('note.png')  # note.png를 배경으로
-    diary_image2 = diary_image1.resize((423, 500), Image.ANTIALIAS)
-    diary_image3 = ImageTk.PhotoImage(diary_image2, master=wdDisplay)
-    diaryimageLabel = tkinter.Label(wdDisplay, image=diary_image3).place(x=-4, y=-25)
-    warnLabel = tkinter.Label(wdDisplay, text="작성한 일기장은 프로그램을 재시작해야 업데이트 됩니다!", fg='red', bg='white').place(x=90, y=7)
-    Date = tkinter.Text(wdDisplay, width=30, height=1, relief="solid")
-    Date.insert(1.0, "년/월/일")
-    Date.place(x=10, y=50)
-    dayofWeek = tkinter.ttk.Combobox(wdDisplay, width=6)  # 요일 선택 콤보박스
-    dayofWeek['values'] = ('월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일')
-    dayofWeek.place(x=230, y=47)
+    wdDisplay.geometry('570x438')
+    wdDisplay.title('Please fill in all fields')
+    warnLabel = tkinter.Label(wdDisplay, text="The created diary will be updated only when the program is restarted.", fg='black').place(x=10, y=7)
+    Date = tkinter.Text(wdDisplay, width=30, height=2, relief="solid")
+    Date.insert(1.0, "Date")
+    Date.place(x=12, y=50)
+    dayofWeek = tkinter.ttk.Combobox(wdDisplay, width=12, font="Arial")  # 요일 선택 콤보박스
+    dayofWeek['values'] = ('Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun')
+    dayofWeek.place(x=236, y=50)
     dayofWeek.current(0)  # value의 가장 첫번째 데이터를 디폴트 텍스트로 선언
-    feelingImage = Image.open('happy.png')
-    feelingImage2 = feelingImage.resize((18, 18), Image.ANTIALIAS)
-    feelingImage3 = ImageTk.PhotoImage(feelingImage2, master=wdDisplay)
-    feelingLabel = tkinter.Label(wdDisplay, image=feelingImage3).place(x=310, y=45)
-    feeling = tkinter.ttk.Combobox(wdDisplay, width=6)  # 기분 선택 콤보박스
-    feeling['value'] = ('행복', '쏘쏘', '산뜻', '우울', '짜증', '화남')
-    feeling.place(x=335, y=47)
+    feeling = tkinter.ttk.Combobox(wdDisplay, width=12, font="Arial")  # 기분 선택 콤보박스
+    feeling['value'] = ('Happy', 'Soso', 'Fresh', 'Depressed', 'Annoyed', 'Angry')
+    feeling.place(x=400, y=50)
     feeling.current(0)
-    Name = tkinter.Text(wdDisplay, width=57, height=1, relief="solid")
-    Name.insert(1.0, "제목")
-    Name.place(x=10, y=95)
-    Role = tkinter.Text(wdDisplay, width=57, height=10, relief="solid")
-    Role.insert(1.0, "내용")
-    Role.place(x=10, y=120)
-    photoUtl = tkinter.Label(wdDisplay, bg='white')
-    loadPhoto = tkinter.Button(wdDisplay, text='사진 불러오기', width=30, fg='white', bg='black', command=lambda: loadPhotoFile(photoUtl)).place(x=100,y=260)
-    submit = tkinter.Button(wdDisplay, text='일기 등록', fg='white', bg='SlateBlue1', command=lambda: check(Name, Role, Date, dayofWeek.get(), feeling.get()), width=30).place(x=100, y=320)
+    Name = tkinter.Text(wdDisplay, width=77, height=2, relief="solid")
+    Name.insert(1.0, "title")
+    Name.place(x=12, y=95)
+    Role = tkinter.Text(wdDisplay, width=77, height=10, relief="solid")
+    Role.insert(1.0, "content")
+    Role.place(x=12, y=140)
+    imageLinkLabel = tkinter.Label(wdDisplay, text="Image link").place(x=12, y=280)
+    photoUtl = tkinter.Label(wdDisplay, fg="black")
+    loadPhoto = tkinter.Button(wdDisplay, text='Upload photo', width=30, fg='white', bg='gray63', font=("Arial", "15"), command=lambda: loadPhotoFile(photoUtl)).place(x=120,y=310)
+    submit = tkinter.Button(wdDisplay, text='Save Diary', fg='white', bg='gray40', font=("Arial", "15"), command=lambda: check(Name, Role, Date, dayofWeek.get(), feeling.get()), width=30).place(x=120, y=360)
     wdDisplay.mainloop()
 
 def playEmotion():  # 표정 인식 함수
@@ -337,17 +315,15 @@ def playEmotion():  # 표정 인식 함수
 
 def goMainWindow():  # 메인화면으로 이동하는 함수
     mainWindow = tkinter.Tk()  # 메인화면 생성
-    mainWindow.geometry("600x300")  # 화면 크기 조절
-    mainWindow.iconbitmap("diary.ico")  # 타이틀창 아이콘
-    mainWindow.title("Main")  # 화면 타이틀
-    mainWindow.configure(bg='khaki1')
-    mainLabel3 = tkinter.Label(mainWindow, text="Welcome!", fg="black", bg='khaki1', font=("System", "30")).pack(
-        side="top", expand=1)
-    bt3 = tkinter.Button(mainWindow, text="표정인식", width=20, height=2, fg='black', bg="white", font=("Terminal", "10"),
-                         command=playEmotion).pack(side="top", expand=1)
-    bt4 = tkinter.Button(mainWindow, text="일기쓰기", width=20, height=2, fg='black', bg="white", font=("Terminal", "10"),
-                         command=writeDiary).pack(expand=1)
-    bt5 = tkinter.Button(mainWindow, text="일기보기", width=20, height=2, fg='black', bg="white", font=("Terminal", "10"), command=viewDiaryList).pack(expand=1)
+    mainWindow.geometry("755x405")  # 화면 크기 조절
+    mainWindow.title("PicamDiary")  # 화면 타이틀
+    subLabel = tkinter.Label(mainWindow, text="Welcome to", fg="black", font=("Arial", "17")).place(x=310, y=60)
+    mainLabel1 = tkinter.Label(mainWindow, text="PiCamDiary", fg="black", font=("Arial", "30")).place(x=270, y=100)
+    bt3 = tkinter.Button(mainWindow, text="Face Recognition", width=20, height=1, fg='black', bg="white", font=("Arial", "15"),
+                         command=playEmotion).place(x=260, y=170)
+    bt4 = tkinter.Button(mainWindow, text="Write Diary", width=20, height=1, fg='white', bg="gray63", font=("Arial", "15"),
+                         command=writeDiary).place(x=260, y=220)
+    bt5 = tkinter.Button(mainWindow, text="View Diary", width=20, height=1, fg='black', bg="gray40", font=("Arial", "15"), command=viewDiaryList).place(x=260, y=270)
     mainWindow.mainloop()
 
 
@@ -390,7 +366,7 @@ def playWebCam(tk):  # 최초 등록 시 얼굴을 추출하기 위한 함수
 
         # waitKey() : 키 입력 대기 함수, 입력값이 0이면 무한대기, 13ms초 대기 또는 저장된 이미지가 100장이면
         if cv2.waitKey(1) == 13 or count == 100:
-            messagebox.showinfo('Message', '등록되었습니다. 프로그램을 재시작 해주세요.')  # 등록 후 팝업창 띄우기
+            messagebox.showinfo('Message', 'Registered. Please restart.')  # 등록 후 팝업창 띄우기
             root.destroy()  # 메인화면 닫기
             tk.destroy()  # 회원가입 화면 닫기
             cap.release()  # 할당된 자원 반납
@@ -408,22 +384,17 @@ def JoinRegister(user_name, user_dp, user_stdnum, tk):  # 회원가입 등록 �
 def Join():  # 회원가입 함수 + 폴더 생성
     join = tkinter.Tk()  # 회원가입 창 생성
     join.geometry("400x200")
-    join.title("사용자등록")
-    join.iconbitmap("joinHappy.ico")
-    join_image1 = Image.open('nightsky.jpg')
-    join_image2 = join_image1.resize((400, 200), Image.ANTIALIAS)
-    join_image3 = ImageTk.PhotoImage(join_image2, master=join)
-    diaryimageLabel = tkinter.Label(join, image=join_image3).place(x=-2, y=0)
+    join.title("PicamDiary")
     name_text = tkinter.Entry(join, width=30, bg='white')  # 이름 입력
-    name_text.insert(0, "이름")
+    name_text.insert(0, "Name")
     name_text.pack(pady=5)
     department_text = tkinter.Entry(join, width=30, bg='white')  # 학과 입력
-    department_text.insert(0, "학과")
+    department_text.insert(0, "Department")
     department_text.pack(pady=5)
     st_num = tkinter.Entry(join, width=30, bg='white')  # 학번 입력
-    st_num.insert(0, "학번")
+    st_num.insert(0, "Student ID")
     st_num.pack(pady=5)
-    bt5 = tkinter.Button(join, text="등록", width=10, height=1, bg='white',
+    bt5 = tkinter.Button(join, text="Register", width=18, height=1, fg="white", bg='gray40', font=("Arial", "15"),
                          command=lambda: JoinRegister(name_text.get(), department_text.get(), st_num.get(), join)).pack(side="bottom", expand=1)
     join.mainloop()
 
@@ -494,20 +465,12 @@ def callCam():  # 웹캡 실행 및 얼굴 인식 시작 함수
                 cv2.destroyAllWindows()  # 창 off
 
 
-root.geometry("500x330")  # 화면 크기 조절
-root.iconbitmap("cameraIco.ico")
-backImage = ImageTk.PhotoImage(file="nightsky.jpg")
-backLabel = tkinter.Label(root, image=backImage)
-backLabel.place(x=-2, y=0)
+root.geometry("755x405")  # 화면 크기 조절
 root.title("PicamDiary")  # 화면 타이틀
-root.configure(bg='SkyBlue1')  # 배경 색상 설정
-mainLabel1 = tkinter.Label(root, text="PiCamDiary", fg="white", bg='black', font=("Terminal", "30")).pack(side="top",
-                                                                                                     expand=1)
-bt1 = tkinter.Button(text="Face ID", width=20, height=1, bg="white", font=("Terminal", "10"), command=callCam).pack(
-    side="top", expand=1)
-mainLabel2 = tkinter.Label(root, text="등록된 사용자가 아니라면", fg="white", bg="black", font=("System", "13")).pack()
-bt2 = tkinter.Button(text="사용자등록", width=20, height=1, bg="white", font=("Terminal", "10"), command=Join).pack(
-    expand=1)
+subLabel = tkinter.Label(root, text="Welcome to", fg="black", font=("Arial", "17")).place(x=310, y=80)
+mainLabel1 = tkinter.Label(root, text="PiCamDiary", fg="black", font=("Arial", "30")).place(x=270, y=120)
+bt1 = tkinter.Button(text="Face ID", width=20, height=1, bg="white", font=("Arial", "15"), command=callCam).place(x=260, y=200)
+bt2 = tkinter.Button(text="User Registration", width=20, height=1, fg="white", bg="gray40", font=("Arial", "15"), command=Join).place(x=260, y=250)
 
 root.mainloop()
 con.close()  # db 해제
