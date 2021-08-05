@@ -1,0 +1,2 @@
+jest.config.py linguist-vendored
+yarn-*.py linguist-vendored
