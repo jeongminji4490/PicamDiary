@@ -70,7 +70,7 @@ def readToJson(index, text, text2, text3, text4, tk): #일기(제목,내용,날�
         text2.config(text=json_date)  # 라벨을 추출한 날짜로 업데이트
         text2.place(x=377, y=30)
         text3.config(text=json_week)  # 라벨을 추출한 요일로 업데이트
-        text3.place(x=442, y=30)
+        text3.place(x=490, y=30)
         text4.config(text=json_feelings)  # 라벨을 추출한 기분으로 업데이트
         text4.place(x=585, y=30)
 
@@ -99,10 +99,10 @@ def searchDiary(searchText,listbox,content,tk,imageLabel,date,week,feeling): # �
             date.config(text=json_date)
             date.place(x=377, y=30)
             week.config(text=json_week)
-            week.place(x=442, y=30)
+            week.place(x=490, y=30)
             feeling.config(text=json_feelings)
             feeling.place(x=585, y=30)
-            disabledBtn = tkinter.Button(tk, text="내용 보기", state=tkinter.DISABLED).place(x=215, y=215)  # 내용보기 비활성화 버튼
+            disabledBtn = tkinter.Button(tk, text="view", state=tkinter.DISABLED).place(x=215, y=215)  # 내용보기 비활성화 버튼
     listbox.delete(1, listbox.size())  # 검색된 일기장 제목만 보이게 하기
     listbox.place(x=30, y=80)
 
@@ -114,7 +114,7 @@ def deleteItem(index,listbox,text,tk,imageLabel): #일기장 삭제 함수
         json_file.close()  # 오픈한 파일 닫고
         os.remove(diary_path+json_title)  # 해당 파일 삭제
     listbox.delete(index)  # 인덱스에 해당하는 리스트박스 데이터도 삭제
-    text.config(text="삭제")  # 삭제된 일기장의 내용을 "삭제"로 바꿈
+    text.config(text="delete")  # 삭제된 일기장의 내용을 "삭제"로 바꿈
     text.place(x=370, y=80)
     delImage1 = PIL.Image.open('그림판_삭제.jpg')  # 삭제 기본 이미지
     delImage2 = delImage1.resize((250, 159), PIL.Image.ANTIALIAS)  # 이미지 크기 조절
@@ -162,50 +162,36 @@ def viewDiaryList(): #일기 보기 함수
                               relief='solid', bg="gray95", bd=1, width=36, height=2)
     MemoLabel.place(x=375, y=23)
 
-    showfeeling = tkinter.Label(diaryList, text="기분:", justify='left', anchor='nw', fg="black", bg="gray95",
-                                width=8, height=1)
-    showfeeling.place(x=555, y=30)
-
-    feelingImage = Image.open('happyS.png')  # 기분이미지1
-    feelingImage2 = feelingImage.resize((18, 18), Image.ANTIALIAS)
-    feelingImage3 = ImageTk.PhotoImage(feelingImage2, master=diaryList)
-    feelingLabel = tkinter.Label(diaryList, image=feelingImage3).place(x=515, y=29)
-
-    feelingImages = Image.open('sadS.png')  # 기분이미지2
-    feelingImages2 = feelingImages.resize((18, 18), Image.ANTIALIAS)
-    feelingImages3 = ImageTk.PhotoImage(feelingImages2, master=diaryList)
-    feelingLabels = tkinter.Label(diaryList, image=feelingImages3).place(x=535, y=29)
-
-    searchBtn = tkinter.Button(diaryList, text='검색', width=7, command=lambda:searchDiary(searchEntry.get(),inputListBox,outputLabel,diaryList,imagelabel,outputLabel2,
+    searchBtn = tkinter.Button(diaryList, text='search', width=7, command=lambda:searchDiary(searchEntry.get(),inputListBox,outputLabel,diaryList,imagelabel,outputLabel2,
                                                         outputLabel3,
                                                         outputLabel4)).place(x=215, y=15)  # 검색버튼
 
-    loadBtn = tkinter.Button(diaryList, text='내용 보기',
+    loadBtn = tkinter.Button(diaryList, text='view', width=8,
                              command=lambda: readToJson(inputListBox.index(inputListBox.curselection()),
                                                         outputLabel,
                                                         outputLabel2,
                                                         outputLabel3,
                                                         outputLabel4,
-                                                        diaryList), bg='black',fg='white',relief='ridge').place(x=215, y=215)
+                                                        diaryList), bg='black', fg='white', relief='ridge').place(x=215, y=215)
     outputLabel = tkinter.Label(diaryList, anchor='nw', justify='left', wraplength=270,
-                                text="내용", relief='solid', fg="black", bg='white', bd=1,
+                                text="content", relief='solid', fg="black", bg='white', bd=1,
                                 width=36, height=23)  # 각 파일의 내용만 출력해서 보여줄 라벨
     outputLabel.place(x=375, y=80)
 
     outputLabel2 = tkinter.Label(diaryList,
-                                 text="날짜:", justify='left', anchor='nw', fg="black", bg="gray95",
+                                 text="date", justify='left', anchor='nw', fg="black", bg="gray95",
                                  width=10, height=1)
     outputLabel2.place(x=377, y=30)
 
     outputLabel3 = tkinter.Label(diaryList,
-                                 text="요일:", justify='left', anchor='nw', fg="black", bg="gray95",
-                                 width=6, height=1)
-    outputLabel3.place(x=442, y=30)
+                                 text="week of day", justify='left', anchor='nw', fg="black", bg="gray95",
+                                 width=10, height=1)
+    outputLabel3.place(x=460, y=30)
 
     outputLabel4 = tkinter.Label(diaryList,
                                  width=5, height=1, fg="black", bg="gray95")
     outputLabel4.place(x=585, y=30)
-    deleteBtn = tkinter.Button(diaryList, fg='white', bg='IndianRed1', text="삭제", width=10,
+    deleteBtn = tkinter.Button(diaryList, fg='white', bg='IndianRed1', text="delete", width=10,
                                command=lambda: deleteItem(inputListBox.index(inputListBox.curselection()), inputListBox, outputLabel, diaryList, imagelabel)).place(x=550, y=435)
 
     for i, word in enumerate(loadFileList):  # 리스트박스에 파일 제목 띄우기
