@@ -4,5 +4,5 @@
 ###### After that, you can enter the main program through face recognition, enjoy facial expression recognition content in it, write a diary, and check the diary list.
 
 #### Opensource used :
-[Face Recognition]:https://github.com/codeingschool/Facial-Recognition
+[Face Recognition][link]:https://github.com/codeingschool/Facial-Recognition
 
