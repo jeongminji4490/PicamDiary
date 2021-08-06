@@ -16,6 +16,7 @@
 ![캡처2](https://user-images.githubusercontent.com/62979330/128454424-5421f24f-4d67-4480-aa4b-06419017331f.PNG)
   ###### In this process, you must enter your name, department, and student number.
   ###### After filling out the information and clicking the register button, the webcam will be turned on soon, and the webcam will take 100 photos of your face and save it in the faces folder for face recognition learning.
+  ##### User information is stored in sqlite database.
 ####
 #### Main Page
 ![image](https://user-images.githubusercontent.com/62979330/128486442-1df8e1d0-6c0e-4453-9f65-536c02981041.png)
@@ -26,9 +27,11 @@
   ###### You can write a diary by entering date(oooo/oo/oo), week of day, feeling, title, content, and an image in your computer.
   ##### The written diaries are saved in JSON format.
   ###### You must fill out all fields.
-  ###### The saved diary is reflected in the diary list only when the program is re-run.
+  ##### The saved diary is reflected in the diary list only when the program is re-run.
 ####
 #### View Diary
 ![image](https://user-images.githubusercontent.com/62979330/128488010-14f06107-d766-481b-8519-f4b1244cd09c.png)
-
+  ###### In the Listbox you can see diaries you wrote.
+  ###### If you click the view button, you can check the contents of the selected diary and If you click the delete button you can delete the selected diary.
+  ##### The deleted diary is reflected in the diary list only when the program is re-run.
 
