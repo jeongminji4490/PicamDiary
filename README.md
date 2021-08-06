@@ -7,10 +7,11 @@
 1. [Face Recognition](https://github.com/codeingschool/Facial-Recognition)
 2. [Facial Expression Recognition](https://github.com/omar178/Emotion-recognition)
 ####
-1. Login Page
+#### Login Page
 ![캡처](https://user-images.githubusercontent.com/62979330/128454080-640f5a1c-ad8a-499d-ac91-1d31481aaac2.PNG)
   ###### If you are a registered user, you can use Face ID immediately,
   ###### but if you are not a registered user, you must register as a user by clicking the Register User button.
-2. Register Page
+####
+#### Register Page
 ![캡처2](https://user-images.githubusercontent.com/62979330/128454424-5421f24f-4d67-4480-aa4b-06419017331f.PNG)
 
