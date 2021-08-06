@@ -18,4 +18,17 @@
   ###### After filling out the information and clicking the register button, the webcam will be turned on soon, and the webcam will take 100 photos of your face and save it in the faces folder for face recognition learning.
 ####
 #### Main Page
+![image](https://user-images.githubusercontent.com/62979330/128486442-1df8e1d0-6c0e-4453-9f65-536c02981041.png)
+  ###### In the main page, you can use the facial expression recognition function, the diary writing function, and the diary viewing function.
+####
+#### Write Diary
+![image](https://user-images.githubusercontent.com/62979330/128486727-e5845a1e-a733-403a-af69-04f142013f58.png)
+  ###### You can write a diary by entering date(oooo/oo/oo), week of day, feeling, title, content, and an image in your computer.
+  ##### The written diaries are saved in JSON format.
+  ###### You must fill out all fields.
+  ###### The saved diary is reflected in the diary list only when the program is re-run.
+####
+#### View Diary
+![image](https://user-images.githubusercontent.com/62979330/128488010-14f06107-d766-481b-8519-f4b1244cd09c.png)
+
 
