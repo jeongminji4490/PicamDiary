@@ -14,4 +14,8 @@
 ####
 #### Register Page
 ![캡처2](https://user-images.githubusercontent.com/62979330/128454424-5421f24f-4d67-4480-aa4b-06419017331f.PNG)
+  ###### In this process, you must enter your name, department, and student number.
+  ###### After filling out the information and clicking the register button, the webcam will be turned on soon, and the webcam will take 100 photos of your face and save it in the faces folder for face recognition learning.
+####
+#### Main Page
 
